@@ -14,7 +14,11 @@ export function AuthProvider({ children }) {
       return;
     }
     api.get('/auth/me')
-      .then((res) => setUser(res.data.user))
+      .then((res) => {
+        if (res.data && res.data.user) {
+          setUser(res.data.user);
+        }
+      })
       .catch(() => {
         localStorage.removeItem('lv_token');
         localStorage.removeItem('lv_username');
@@ -22,17 +26,17 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // Register — sirf account banao, login nahi
   const signup = async (name, email, password) => {
     const res = await api.post('/auth/register', { name, email, password });
     return res.data;
   };
 
-  // Login — token save karo aur user set karo
   const signin = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
-    localStorage.setItem('lv_token', res.data.token);
-    setUser(res.data.user);
+    if (res.data && res.data.token) {
+      localStorage.setItem('lv_token', res.data.token);
+      setUser(res.data.user);
+    }
     return res.data;
   };
 

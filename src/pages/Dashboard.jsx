@@ -58,22 +58,23 @@ export default function Dashboard() {
     if (user) fetchMyProfile();
   }, [user]);
 
-  const fetchMyProfile = async () => {
-    try {
-      const res = await api.get('/auth/me');
-      if (res.data.profile) {
-        setProfile(res.data.profile);
-        fetchLinks(res.data.profile._id);
-        localStorage.setItem('lv_username', res.data.profile.username);
-      } else {
-        setProfile(null);
-        setLoading(false);
-      }
-    } catch {
+ const fetchMyProfile = async () => {
+  try {
+    const res = await api.get('/auth/me');
+    if (res.data && res.data.profile) {
+      setProfile(res.data.profile);
+      fetchLinks(res.data.profile._id);
+      localStorage.setItem('lv_username', res.data.profile.username);
+    } else {
       setProfile(null);
       setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error('Profile fetch error:', err.message);
+    setProfile(null);
+    setLoading(false);
+  }
+};
 
   const fetchLinks = async (profileId) => {
     try {
