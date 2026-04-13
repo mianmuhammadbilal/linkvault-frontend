@@ -62,30 +62,43 @@ export default function Dashboard() {
   try {
     const res = await api.get('/auth/me');
     if (res.data && res.data.profile) {
-      setProfile(res.data.profile);
-      fetchLinks(res.data.profile._id);
-      localStorage.setItem('lv_username', res.data.profile.username);
+      const prof = res.data.profile;
+      setProfile({
+        _id: prof._id || '',
+        username: prof.username || '',
+        fullName: prof.fullName || '',
+        bio: prof.bio || '',
+        profileImage: prof.profileImage || '',
+        theme: prof.theme || 'dark',
+      });
+      fetchLinks(prof._id);
+      localStorage.setItem('lv_username', prof.username);
     } else {
       setProfile(null);
       setLoading(false);
     }
   } catch (err) {
-    console.error('Profile fetch error:', err.message);
+    console.error('fetchMyProfile error:', err.message);
     setProfile(null);
     setLoading(false);
   }
 };
 
-  const fetchLinks = async (profileId) => {
-    try {
-      const res = await api.get(`/links/${profileId}`);
+const fetchLinks = async (profileId) => {
+  try {
+    const res = await api.get(`/links/${profileId}`);
+    if (res.data && Array.isArray(res.data.links)) {
       setLinks(res.data.links);
-    } catch {
+    } else {
       setLinks([]);
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error('fetchLinks error:', err.message);
+    setLinks([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Drag end handler
   const handleDragEnd = async (event) => {
@@ -236,7 +249,7 @@ export default function Dashboard() {
                   <FiZap size={14} /> Quick Setup — 2 minutes
                 </div>
                 <h1 className="text-2xl font-bold text-white mb-2">
-                  Hey {user?.name?.split(' ')[0]}! 👋
+                  Hey {user?.name ? user.name.split(' ')[0] : 'there'}! 👋
                 </h1>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   You're one step away! Set up your profile below.

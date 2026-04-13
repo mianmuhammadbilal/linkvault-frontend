@@ -33,22 +33,19 @@ export default function Register() {
   };
 
   if (success) {
-    return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
-        <div className="text-center animate-fade-in">
-          <div className="w-20 h-20 bg-green-500/20 border-2 border-green-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
-            <FiCheck size={32} className="text-green-400" />
-          </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Account Created! 🎉</h2>
-          <p className="text-gray-400 mb-1">Welcome to LinkVault!</p>
-          <p className="text-gray-600 text-sm">Redirecting to login...</p>
-          <div className="mt-6 w-48 h-1 bg-gray-800 rounded-full mx-auto overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-violet-500 to-purple-500 rounded-full animate-pulse"></div>
-          </div>
+  return (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
+      <div className="text-center">
+        <div className="w-20 h-20 bg-green-500/20 border-2 border-green-500/40 rounded-full flex items-center justify-center mx-auto mb-6">
+          <FiCheck size={32} className="text-green-400" />
         </div>
+        <h2 className="text-2xl font-bold text-white mb-2">Account Created!</h2>
+        <p className="text-gray-400 mb-1">Welcome to LinkVault!</p>
+        <p className="text-gray-600 text-sm">Redirecting to login...</p>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   return (
     <div className="min-h-screen bg-gray-950 flex">

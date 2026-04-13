@@ -12,18 +12,22 @@ export default function Login() {
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      await signin(form.email, form.password);
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  try {
+    const data = await signin(form.email, form.password);
+    if (data && data.token) {
       navigate('/');
-    } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
-    } finally {
-      setLoading(false);
+    } else {
+      setError('Login failed — please try again');
     }
-  };
+  } catch (err) {
+    setError(err.response?.data?.error || 'Login failed');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-950 flex">
