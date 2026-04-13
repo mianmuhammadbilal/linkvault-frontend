@@ -1,11 +1,7 @@
 import axios from 'axios';
 
-const BASEURL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
-console.log('API URL:', BASEURL);
-
 const api = axios.create({
-  baseURL: BASEURL,
+  baseURL: 'https://linkvault-backend-production-612e.up.railway.app/api',
   headers: {
     'Content-Type': 'application/json',
   },
