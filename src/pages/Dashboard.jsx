@@ -226,13 +226,13 @@ const fetchLinks = async (profileId) => {
                 </button>
               </>
             )}
-            <button
-              onClick={logout}
-              title="Logout"
-              className="p-2 text-gray-500 hover:text-red-400 rounded-lg hover:bg-gray-800/80 transition-all"
-            >
-              <FiLogOut size={15} />
-            </button>
+           <button
+  onClick={logout}
+  className="flex items-center gap-1.5 text-gray-400 hover:text-red-400 text-sm px-3 py-2 rounded-lg hover:bg-red-400/10 border border-gray-700 hover:border-red-400/30 transition-all"
+>
+  <FiLogOut size={14} />
+  <span className="hidden sm:inline">Logout</span>
+</button>
           </div>
         </div>
       </header>
