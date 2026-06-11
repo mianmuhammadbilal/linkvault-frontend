@@ -34,7 +34,7 @@ A modern, responsive frontend for LinkVault — a Linktree-style SaaS platform b
 
 ## 📁 Project Structure
 
-frontend/
+```frontend/
 ├── public/
 │   └── vercel.json        # Vercel routing config
 ├── src/
