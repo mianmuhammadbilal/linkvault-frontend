@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://linkvault-backend-production-612e.up.railway.app/api',
+  baseURL: 'https://linkvault-backend-y3h6.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
